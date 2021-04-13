@@ -21,16 +21,31 @@ class RichTextEditorPrompt extends LitElement {
     return [
       ...RichTextToolbarStyles,
       css`
-        #prompt {
-          display: block;
-          width: 300px;
-          max-width: 300px;
-          --simple-popover-padding: 0px;
-          z-index: 2;
+        :host {
+          z-index: 300;
+          position: absolute;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0,0,0,0.5);
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
+
+        #prompt {
+          display: var(--rich-text-editor-promt-display, block);
+          width: var(--rich-text-editor-promt-width, 300px);
+          max-width: var(--rich-text-editor-promt-max-width, 300px);
+          --simple-popover-padding: 0px;
+          z-index: var(--rich-text-editor-promt-z-index, 300);
+          position: relative !important;
+        }
+
         #prompt[hidden] {
           display: none;
         }
+
         #prompt #form {
           display: flex;
           flex-direction: column;
