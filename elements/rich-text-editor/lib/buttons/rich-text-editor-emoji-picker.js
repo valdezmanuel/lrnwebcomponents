@@ -9,11 +9,6 @@ import "@lrnwebcomponents/simple-picker/lib/simple-emoji-picker.js";
  * `rich-text-editor-emoji-picker`
  * an emoji picker for the rich-text-editor
  *
- * @customElement
- * @lit-html
- * @lit-element
- * @extends RichTextEditorPickerBehaviors
- * @extends LitElement
  * @element rich-text-editor-emoji-picker
  * @demo ./demo/buttons.html
  */
@@ -29,7 +24,7 @@ class RichTextEditorEmojiPicker extends RichTextEditorPickerBehaviors(
   }
 
   static get styles() {
-    return [...super.styles, css``];
+    return [...super.styles];
   }
 
   // render function for template
@@ -37,25 +32,23 @@ class RichTextEditorEmojiPicker extends RichTextEditorPickerBehaviors(
   // render function for template
   render() {
     return html`
-      <label id="listLabel" for="button"> ${this.labelTemplate} </label>
       <simple-emoji-picker
         id="button"
-        id="button"
         ?allow-null="${this.allowNull}"
-        aria-labeledby="listlabel"
-        controls="${super.controls}"
+        class="rtebutton ${this.toggled ? "toggled" : ""}"
         ?disabled="${this.disabled}"
-        .emoji-types="${this.emojiTypes}"
-        @keydown="${this._pickerFocus}"
-        label=""
+        controls="${super.controls}"
         @mouseover="${this._pickerFocus}"
-        tabindex="0"
-        title-as-html
-        ?toggled="${this.toggled}"
+        @keydown="${this._pickerFocus}"
         @value-changed="${this._pickerChange}"
+        tabindex="0"
+        ?title-as-html="${this.titleAsHtml}"
       >
+        <span id="label" class="${super.labelStyle}">${this.currentLabel}</span>
       </simple-emoji-picker>
-      ${super.tooltipTemplate}
+      <simple-tooltip id="tooltip" for="button"
+        >${this.currentLabel}</simple-tooltip
+      >
     `;
   }
 
@@ -69,7 +62,6 @@ class RichTextEditorEmojiPicker extends RichTextEditorPickerBehaviors(
       emojiTypes: {
         name: "emojiTypes",
         type: Array,
-        attribute: "emoji-types",
       },
     };
   }
@@ -89,6 +81,7 @@ class RichTextEditorEmojiPicker extends RichTextEditorPickerBehaviors(
     ];
     this.icon = "editor:insert-emoticon";
     this.label = "Insert emoji";
+    this.titleAsHtml = true;
     this.command = "insertHTML";
   }
 
@@ -99,13 +92,6 @@ class RichTextEditorEmojiPicker extends RichTextEditorPickerBehaviors(
         this.titleAsHtml = true;
     });
   }
-  /**
-   * overrides RichTextEditorPickerBehaviors
-   * since simple-symbol-picker already handles options
-   *
-   * @memberof RichTextEditorSymbolPicker
-   */
-  _setOptions() {}
 }
 window.customElements.define(
   RichTextEditorEmojiPicker.tag,

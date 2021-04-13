@@ -9,11 +9,6 @@ import "@lrnwebcomponents/simple-picker/lib/simple-symbol-picker.js";
  * `rich-text-editor-symbol-picker`
  * a symbol picker for the rich-text-editor
  *
- * @customElement
- * @lit-html
- * @lit-element
- * @extends RichTextEditorPickerBehaviors
- * @extends LitElement
  * @element rich-text-editor-symbol-picker
  * @demo ./demo/buttons.html
  */
@@ -28,27 +23,30 @@ class RichTextEditorSymbolPicker extends RichTextEditorPickerBehaviors(
     return "rich-text-editor-symbol-picker";
   }
 
+  static get styles() {
+    return [...super.styles];
+  }
+
   // render function for template
   render() {
     return html`
-      <label id="listLabel" for="button"> ${this.labelTemplate} </label>
       <simple-symbol-picker
         id="button"
         ?allow-null="${this.allowNull}"
-        aria-labeledby="listlabel"
-        controls="${super.controls}"
+        class="rtebutton ${this.toggled ? "toggled" : ""}"
         ?disabled="${this.disabled}"
-        @keydown="${this._pickerFocus}"
-        label=""
+        controls="${super.controls}"
         @mouseover="${this._pickerFocus}"
-        .symbol-types="${this.symbolTypes}"
-        tabindex="0"
-        title-as-html
-        ?toggled="${this.toggled}"
+        @keydown="${this._pickerFocus}"
         @value-changed="${this._pickerChange}"
+        tabindex="0"
+        ?title-as-html="${this.titleAsHtml}"
       >
+        <span id="label" class="${super.labelStyle}">${this.currentLabel}</span>
       </simple-symbol-picker>
-      ${super.tooltipTemplate}
+      <simple-tooltip id="tooltip" for="button"
+        >${this.currentLabel}</simple-tooltip
+      >
     `;
   }
 
@@ -63,7 +61,6 @@ class RichTextEditorSymbolPicker extends RichTextEditorPickerBehaviors(
       symbolTypes: {
         name: "symbolTypes",
         type: Array,
-        attribute: "symbol-types",
       },
     };
   }
@@ -73,14 +70,20 @@ class RichTextEditorSymbolPicker extends RichTextEditorPickerBehaviors(
     this.icon = "editor:functions";
     this.label = "Insert symbol";
     this.symbolTypes = ["symbols", "math", "characters", "greek", "misc"];
+    this.titleAsHtml = true;
     this.command = "insertHTML";
   }
 
+  updated(changedProperties) {
+    super.updated(changedProperties);
+    changedProperties.forEach((oldValue, propName) => {
+      if (propName === "titleAsHtml" && !this.titleAsHtml)
+        this.titleAsHtml = true;
+    });
+  }
+
   /**
-   * overrides RichTextEditorPickerBehaviors
-   * since simple-symbol-picker already handles options
-   *
-   * @memberof RichTextEditorSymbolPicker
+   * Handles default options loaded from an external js file
    */
   _setOptions() {}
 }

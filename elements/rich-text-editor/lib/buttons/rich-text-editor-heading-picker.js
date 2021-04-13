@@ -8,11 +8,6 @@ import { RichTextEditorPickerBehaviors } from "./rich-text-editor-picker.js";
  * `rich-text-editor-heading-picker`
  * a heading picker for the rich-text-editor
  *
- * @customElement
- * @lit-html
- * @lit-element
- * @extends RichTextEditorPickerBehaviors
- * @extends LitElement
  * @element rich-text-editor-heading-picker
  * @demo ./demo/buttons.html
  */
@@ -51,7 +46,6 @@ class RichTextEditorHeadingPicker extends RichTextEditorPickerBehaviors(
     this.command = "formatBlock";
     this.icon = null;
     this.label = "Block format";
-    this.tagsList = "p,h1,h2,h3,h4,h5,h6,div,address,blockquote,pre";
   }
 
   // properties available to the custom element for data binding
@@ -71,15 +65,19 @@ class RichTextEditorHeadingPicker extends RichTextEditorPickerBehaviors(
       },
     };
   }
+  get blockSelectors() {
+    let arr = [
+      ...super.blockSelectors.split(","),
+      ...(this.blocks || []).map((blocks) => blocks.tag),
+    ].filter((v, i, s) => s.indexOf(v) === i);
+    return arr.join(",");
+  }
 
   /**
-   * overrides RichTextEditorPickerBehaviors
-   * to populate picker with allowable blocks
-   *
-   * @memberof RichTextEditorHeadingPicker
+   * populates the picker
    */
   _setOptions() {
-    this.tagsList = this.blocks.map((block) => block.tag).join(",");
+    this.tag = this.blocks.map((block) => block.tag).join(",");
     this.options = [
       [{ alt: this.label, value: null }],
       ...this.blocks.map((block) => [{ alt: block.label, value: block.tag }]),

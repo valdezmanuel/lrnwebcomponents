@@ -9,11 +9,6 @@ import "@lrnwebcomponents/absolute-position-behavior/absolute-position-behavior.
  * `rich-text-editor-toolbar-mini`
  * `a mini floating toolbar for the rich text editor`
  *
- * @customElement
- * @extends RichTextEditorToolbarBehaviors
- * @extends LitElement
- * @lit-html
- * @lit-element
  * @element rich-text-editor-toolbar-mini
  * @demo ./demo/mini.html mini floating toolbar
  */
@@ -28,18 +23,122 @@ class RichTextEditorToolbarMini extends RichTextEditorToolbarBehaviors(
   }
 
   static get styles() {
-    return [...super.baseStyles, ...super.miniStyles];
+    return [
+      ...super.baseStyles,
+      css`
+        :host #floating {
+          display: flex;
+        }
+      `,
+    ];
   }
 
   // properties available to the custom element for data binding
   render() {
-    return html` ${super.miniTemplate} `;
+    return html`
+      <absolute-position-behavior
+        auto
+        id="floating"
+        fit-to-visible-bounds
+        for="${this.controls}"
+        position="top"
+      >
+        ${super.render()}
+      </absolute-position-behavior>
+    `;
   }
 
   constructor() {
     super();
     this.sticky = false;
-    this.config = this.miniConfig;
+    this.config = [
+      {
+        label: "Basic Inline Operations",
+        type: "button-group",
+        buttons: [
+          {
+            command: "bold",
+            icon: "editor:format-bold",
+            label: "Bold",
+            toggles: true,
+            type: "rich-text-editor-button",
+          },
+          {
+            command: "italic",
+            icon: "editor:format-italic",
+            label: "Italics",
+            toggles: true,
+            type: "rich-text-editor-button",
+          },
+          {
+            collapsedUntil: "md",
+            command: "removeFormat",
+            icon: "editor:format-clear",
+            label: "Erase Format",
+            type: "rich-text-editor-button",
+          },
+        ],
+      },
+      {
+        label: "Links",
+        type: "button-group",
+        buttons: [
+          {
+            command: "link",
+            icon: "link",
+            label: "Link",
+            prompt: "href",
+            toggledCommand: "unlink",
+            toggledIcon: "mdextra:unlink",
+            toggledLabel: "Unink",
+            toggles: true,
+            type: "rich-text-editor-link",
+          },
+        ],
+      },
+      {
+        collapsedUntil: "md",
+        label: "Subscript and Superscript",
+        type: "button-group",
+        buttons: [
+          {
+            command: "subscript",
+            icon: "mdextra:subscript",
+            label: "Subscript",
+            toggles: true,
+            type: "rich-text-editor-button",
+          },
+          {
+            command: "superscript",
+            icon: "mdextra:superscript",
+            label: "Superscript",
+            toggles: true,
+            type: "rich-text-editor-button",
+          },
+        ],
+      },
+      {
+        collapsedUntil: "sm",
+        label: "Lists and Indents",
+        type: "button-group",
+        buttons: [
+          {
+            command: "insertOrderedList",
+            icon: "editor:format-list-numbered",
+            label: "Ordered List",
+            toggles: true,
+            type: "rich-text-editor-button",
+          },
+          {
+            command: "insertUnorderedList",
+            icon: "editor:format-list-bulleted",
+            label: "Unordered List",
+            toggles: true,
+            type: "rich-text-editor-button",
+          },
+        ],
+      },
+    ];
   }
   updated(changedProperties) {
     super.updated(changedProperties);

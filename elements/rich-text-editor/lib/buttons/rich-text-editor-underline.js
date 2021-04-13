@@ -8,11 +8,6 @@ import { RichTextEditorPromptButtonBehaviors } from "./rich-text-editor-prompt-b
  * `rich-text-editor-underline`
  * a button for rich text editor (custom buttons can extend this)
  *
- * @customElement
- * @lit-html
- * @lit-element
- * @extends RichTextEditorPromptButtonBehaviors
- * @extends LitElement
  * @element rich-text-editor-underline
  * @demo ./demo/buttons.html
  */
@@ -48,7 +43,7 @@ class RichTextEditorUnderline extends RichTextEditorPromptButtonBehaviors(
         inputMethod: "boolean",
       },
     ];
-    this.tagsList = "u";
+    this.tag = "u";
     this.icon = "editor:format-underlined";
     this.label = "Underline (not recommended)";
     this.toggles = true;
@@ -58,30 +53,23 @@ class RichTextEditorUnderline extends RichTextEditorPromptButtonBehaviors(
       confirm: false,
     };
   }
+  get blockSelectors() {
+    return "u";
+  }
 
   /**
-   * overriden from RichTextEditorPromptButtonBehaviors:
-   * keeps prompt command value undefined
-   * @memberof RichTextEditorUnderline
+   * determaines commandVal based on values passed from prompt
    */
   get promptCommandVal() {
     this.commandVal = undefined;
   }
 
   /**
-   * overriden from RichTextEditorPromptButtonBehaviors:
-   * creates a confirm checkbox to force user
-   * to acknowledge usability issues with underline
-   * @memberof RichTextEditorUnderline
+   * updates prompt fields with selected range data
    */
   getValue() {
     return { confirm: !!this.toggled };
   }
-  /**
-   * overriden from RichTextEditorPromptButtonBehaviors:
-   * sets toggled to whether users has confirmed
-   * @memberof RichTextEditorUnderline
-   */
   setToggled() {
     this.toggled = !!this.getPropValue("confirm");
   }

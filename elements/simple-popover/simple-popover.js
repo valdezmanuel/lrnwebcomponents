@@ -89,6 +89,7 @@ class SimplePopover extends AbsolutePositionBehavior {
           max-height: var(--simple-popover-max-height, 200px);
           overflow: auto;
           scroll-behavior: smooth;
+          width: 300px;
         }
 
         #pointer-outer {
@@ -138,9 +139,6 @@ class SimplePopover extends AbsolutePositionBehavior {
     return html` <div>
       <div id="content" role="alertdialog">
         <slot></slot>
-      </div>
-      <div id="pointer-outer">
-        <div id="pointer" .style=${this._getMargins(this.__positions)}></div>
       </div>
     </div>`;
   }

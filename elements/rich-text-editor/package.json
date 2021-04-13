@@ -1,5 +1,5 @@
 {
-  "name": "@lrnwebcomponents/rich-text-editor",
+  "name": "@valdezmanuel/rich-text-editor",
   "wcfactory": {
     "className": "RichTextEditor",
     "customElementClass": "LitElement",
@@ -19,7 +19,7 @@
       "...RichTextStyles"
     ]
   },
-  "version": "3.0.6",
+  "version": "0.0.6",
   "description": "a standalone rich text editor",
   "repository": {
     "type": "git",
@@ -41,18 +41,26 @@
   "author": {
     "name": "nikkimk"
   },
+  "contributors": [
+    {
+      "name": "Manuel Valdez"
+    }
+  ],
   "license": "Apache-2.0",
   "dependencies": {
+    "@lrnwebcomponents/a11y-collapse": "^3.0.6",
     "@lrnwebcomponents/absolute-position-behavior": "^3.0.6",
-    "@lrnwebcomponents/code-editor": "^3.0.6",
+    "@lrnwebcomponents/es-global-bridge": "^3.0.0",
     "@lrnwebcomponents/md-extra-icons": "^3.0.6",
+    "@lrnwebcomponents/responsive-utility": "^3.0.6",
     "@lrnwebcomponents/simple-fields": "^3.0.6",
-    "@lrnwebcomponents/simple-icon": "^3.0.6",
     "@lrnwebcomponents/simple-picker": "^3.0.6",
     "@lrnwebcomponents/simple-popover": "^3.0.6",
-    "@lrnwebcomponents/simple-toolbar": "^3.0.6",
-    "@lrnwebcomponents/utils": "^3.0.6",
+    "@lrnwebcomponents/simple-tooltip": "^3.0.5",
+    "@polymer/iron-a11y-keys": "^3.0.1",
+    "@polymer/iron-fit-behavior": "^3.0.1",
     "@polymer/iron-icons": "^3.0.1",
+    "@polymer/paper-input": "^3.0.2",
     "lit-element": "2.4.0",
     "shadow-selection-polyfill": "^1.1.0"
   },
@@ -62,9 +70,9 @@
     "@polymer/iron-component-page": "github:PolymerElements/iron-component-page",
     "@polymer/iron-demo-helpers": "3.1.0",
     "@webcomponents/webcomponentsjs": "2.5.0",
-    "concurrently": "5.3.0",
+    "concurrently": "6.0.2",
     "gulp-babel": "8.0.0",
-    "lodash": "4.17.19",
+    "lodash": "4.17.21",
     "polymer-cli": "1.9.11",
     "wct-browser-legacy": "1.0.2",
     "web-animations-js": "2.3.2"
