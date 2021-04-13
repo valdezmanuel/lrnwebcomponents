@@ -7,9 +7,9 @@ exports.RichTextEditorToolbarBehaviors = exports.RichTextEditorToolbar = void 0;
 
 var _litElement = require("lit-element/lit-element.js");
 
-var _simpleToolbar = require("@lrnwebcomponents/simple-toolbar/simple-toolbar.js");
+var _simpleToolbar = require("@valdezmanuel/simple-toolbar/simple-toolbar.js");
 
-var _simpleToolbarButton = require("@lrnwebcomponents/simple-toolbar/lib/simple-toolbar-button.js");
+var _simpleToolbarButton = require("@valdezmanuel/simple-toolbar/lib/simple-toolbar-button.js");
 
 var _richTextEditorButton = require("../buttons/rich-text-editor-button.js");
 

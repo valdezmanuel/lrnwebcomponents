@@ -7,7 +7,7 @@ exports.RichTextToolbarStyles = exports.RichTextStyles = exports.RichTextEditorB
 
 var _litElement = require("lit-element/lit-element.js");
 
-var _simpleToolbarButton = require("@lrnwebcomponents/simple-toolbar/lib/simple-toolbar-button.js");
+var _simpleToolbarButton = require("@valdezmanuel/simple-toolbar/lib/simple-toolbar-button.js");
 
 require("@lrnwebcomponents/rich-text-editor/lib/singletons/rich-text-editor-selection.js");
 

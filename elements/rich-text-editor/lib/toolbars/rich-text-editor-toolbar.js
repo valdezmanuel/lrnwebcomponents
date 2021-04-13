@@ -3,8 +3,8 @@
  * @license Apache-2.0, see License.md for full text.
  */
 import { LitElement, html, css } from "lit-element/lit-element.js";
-import { SimpleToolbarBehaviors } from "@lrnwebcomponents/simple-toolbar/simple-toolbar.js";
-import { SimpleToolbarButtonBehaviors } from "@lrnwebcomponents/simple-toolbar/lib/simple-toolbar-button.js";
+import { SimpleToolbarBehaviors } from "@valdezmanuel/simple-toolbar/simple-toolbar.js";
+import { SimpleToolbarButtonBehaviors } from "@valdezmanuel/simple-toolbar/lib/simple-toolbar-button.js";
 import {
   RichTextStyles,
   RichTextToolbarStyles,
